@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pokédex Interativa</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Pokédex Interativa</h1>
+    <div class="controls-container">
+      <div class="controls main-controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar por nome..."
+          autocomplete="off"
+        />
+
+        <div class="filter-group">
+          <label for="typeFilterBtn" class="filter-label">Tipos:</label>
+          <button id="typeFilterBtn" class="filter-dropdown-btn">Todos os Tipos ▼</button>
+          <div id="typeFilterOptions" class="filter-options hidden">
+            </div>
+        </div>
+
+        <div class="filter-group">
+          <label for="weaknessFilterBtn" class="filter-label">Fraquezas:</label>
+          <button id="weaknessFilterBtn" class="filter-dropdown-btn">Todas as Fraquezas ▼</button>
+          <div id="weaknessFilterOptions" class="filter-options hidden">
+            </div>
+        </div>
+
+        <button id="clearAllFiltersBtn">🧹 Limpar Filtros</button>
+        <button id="toggleTheme">🌙 Tema</button>
+        <a href="favoritos.html" class="favoritos-btn">⭐ Favoritos</a>
+      </div>
+
+      <div class="controls generation-control">
+        <label for="generationFilterBtn" class="filter-label">Geração:</label>
+        <button id="generationFilterBtn" class="filter-dropdown-btn">Todas as Gerações ▼</button>
+        <div id="generationFilterOptions" class="filter-options hidden">
+          </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="pokemonContainer" class="pokemon-container"></main>
+  <div class="load-more-container">
+    <button id="loadMore">Carregar mais</button>
+  </div>
+
+  <footer>
+    <p>Feito por um fã de Pokémon</p>
+  </footer>
+
+  <div id="pokemonModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="feedbackNotification" class="feedback-notification hidden"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+:root {
+  --bg-light: #f2f2f2;
+  --text-light: #333;
+  --bg-dark: #1e1e1e;
+  --text-dark: #ddd;
+
+  --filter-item-width: 180px;
+  --filter-item-height: 40px;
+}
+
+body.light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Remove a customização do scrollbar para tipos e fraquezas */
+.filter-options {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+
+.header {
+  background-color: #ef5350;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Garante que os inputs, selects e botões de filtro tenham tamanho e alinhamento consistentes */
+.header input,
+.header select,
+.filter-dropdown-btn,
+.controls button,
+.controls a {
+  padding: 10px;
+  width: var(--filter-item-width);
+  height: var(--filter-item-height);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  appearance: none;
+  background-color: #ffffff;
+  color: #000;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+body.dark .header input,
+body.dark .header select,
+body.dark .filter-dropdown-btn,
+body.dark .controls button,
+body.dark .controls a {
+  background-color: #333;
+  color: var(--text-dark);
+  border-color: #555;
+}
+
+
+/* Ajustes específicos para inputs e selects */
+.header input {
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.header select {
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 10px;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2C197.973L146.202%2C292.4L5.4%2C197.973L0%2C192.574L146.202%2C0L292.4%2C192.574z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    padding-right: 30px;
+}
+
+body.dark .header select {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ddd%22%20d%3D%22M287%2C197.973L146.202%2C292.4L5.4%2C197.973L0%2C192.574L146.202%2C0L292.4%2C192.574z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.filter-dropdown-btn {
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 10px;
+    padding-right: 30px;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2C197.973L146.202%2C292.4L5.4%2C197.973L0%2C192.574L146.202%2C0L292.4%2C192.574z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+body.dark .filter-dropdown-btn {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ddd%22%20d%3D%22M287%2C197.973L146.202%2C292.4L5.4%2C197.973L0%2C192.574L146.202%2C0L292.4%2C192.574z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.controls.generation-control {
+  margin-top: 0;
+  gap: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
+
+
+.filter-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.filter-group .filter-label {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.filter-options {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    width: var(--filter-item-width);
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 10px 0;
+    margin-top: 5px;
+    top: var(--filter-item-height);
+    left: 0;
+    text-align: left;
+    max-width: 90vw;
+    box-sizing: border-box;
+}
+
+body.dark .filter-options {
+    background-color: #2c2c2c;
+}
+
+.filter-options.hidden {
+    display: none;
+}
+
+.filter-options .checkbox-item {
+    padding: 5px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.filter-options .checkbox-item:hover {
+    background-color: #f0f0f0;
+}
+
+body.dark .filter-options .checkbox-item:hover {
+    background-color: #3e3e3e;
+}
+
+/* Estilo para o checkbox real (o quadrado) quando selecionado */
+.filter-options .checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid var(--text-light); /* Borda do quadrado */
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+}
+
+body.dark .filter-options .checkbox-item input[type="checkbox"] {
+    border-color: var(--text-dark);
+}
+
+.filter-options .checkbox-item input[type="checkbox"]::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--checkbox-checked-color, #4CAF50); /* Cor do checkmark (verde) */
+    background-color: CanvasText; /* Cor de fundo quando marcado */
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 60%);
+}
+
+.filter-options .checkbox-item input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+/* Estilo para o LABEL do item de checkbox selecionado (cor do texto) */
+.filter-options .checkbox-item.selected label {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+body.dark .filter-options .checkbox-item.selected label {
+    color: #8bc34a;
+}
+
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.pokemon-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 16px;
+  transition: transform 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+body.dark .pokemon-card {
+  background-color: #2c2c2c;
+  color: var(--text-dark);
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-card img {
+  width: 120px;
+  height: 120px;
+}
+
+/* Estilos para os badges de tipo nos cards (sem gradiente) */
+.pokemon-type {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+  display: inline-block; /* Continua inline-block para separar os badges */
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 2px 4px;
+  min-width: 60px;
+  text-align: center;
+  height: 25px; /* Altura para tipos, ajusta conforme necessário */
+  box-sizing: border-box; /* Inclui padding na altura */
+  overflow: hidden; /* Garante que o texto não vaze */
+  white-space: nowrap; /* Impede que o texto quebre a linha */
+}
+
+/* Cores de fundo dos tipos para os cards */
+.type-normal { background-color: #A8A878; }
+.type-fire { background-color: #F08030; }
+.type-water { background-color: #6890F0; }
+.type-grass { background-color: #78C850; }
+.type-electric { background-color: #F8D030; }
+.type-ice { background-color: #98D8D8; }
+.type-fighting { background-color: #C03028; }
+.type-poison { background-color: #A040A0; }
+.type-ground { background-color: #E0C068; }
+.type-flying { background-color: #A890F0; }
+.type-bug { background-color: #A8B820; }
+.type-rock { background-color: #B8A038; }
+.type-ghost { background-color: #705898; }
+.type-dragon { background-color: #7038F8; }
+.type-steel { background-color: #B8B8D0; }
+.type-fairy { background-color: #EE99AC; }
+.type-dark { background-color: #705848; }
+
+
+/* Estilo específico para tipos duplos (APENAS PARA O MODAL) */
+.pokemon-type.dual-type {
+    display: inline-flex; /* Mantém flex para centralizar o texto dentro do gradiente */
+    padding: 0; /* Remove padding externo para que o gradiente preencha */
+    height: 25px; /* Altura consistente */
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pokemon-type.dual-type span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%; /* Metade para cada tipo no gradiente */
+    height: 100%;
+    padding: 4px 0; /* Padding interno para o texto */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: gray;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.favorite-btn.favorited {
+  color: red;
+}
+
+footer {
+  text-align: center;
+  padding: 16px;
+  background-color: #ef5350;
+  color: white;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#loadMore {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #ef5350;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#loadMore:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+/* Modal de Detalhes */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative;
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+body.dark .modal-content {
+  background: #333;
+  color: var(--text-dark);
+}
+
+/* Sprites no Modal */
+.pokemon-sprites {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pokemon-sprites .main-sprite {
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+}
+
+.pokemon-sprites .sprite-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pokemon-sprites .sprite-gallery img {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.pokemon-sprites .sprite-gallery img:hover {
+    transform: scale(1.1);
+}
+
+/* Stats no Modal */
+.pokemon-stats {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+body.dark .pokemon-stats {
+    border-top-color: #555;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.stat-name {
+    flex: 0 0 80px;
+    font-weight: 700;
+    color: #ef5350;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.stat-value {
+    flex: 0 0 35px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.stat-bar-bg {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+body.dark .stat-bar-bg {
+    background-color: #555;
+}
+
+.stat-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    transition: width 0.5s ease-out;
+}
+
+/* Cores das barras de stat based on value */
+.stat-bar[style*="width"] {
+  background-color: #ccc;
+}
+.stat-bar[style*="width: 0%"], .stat-bar[style*="width: 1%"], .stat-bar[style*="width: 2%"], .stat-bar[style*="width: 3%"], .stat-bar[style*="width: 4%"], .stat-bar[style*="width: 5%"], .stat-bar[style*="width: 6%"], .stat-bar[style*="width: 7%"], .stat-bar[style*="width: 8%"], .stat-bar[style*="width: 9%"], .stat-bar[style*="width: 10%"],
+.stat-bar[style*="width: 11%"], .stat-bar[style*="width: 12%"], .stat-bar[style*="width: 13%"], .stat-bar[style*="width: 14%"], .stat-bar[style*="width: 15%"], .stat-bar[style*="width: 16%"], .stat-bar[style*="width: 17%"], .stat-bar[style*="width: 18%"], .stat-bar[style*="width: 19%"], .stat-bar[style*="width: 20%"] { background-color: #F44336; }
+.stat-bar[style*="width: 2"], .stat-bar[style*="width: 3"] { background-color: #ff9800; }
+.stat-bar[style*="width: 4"], .stat-bar[style*="width: 5"], .stat-bar[style*="width: 6"] { background-color: #ffc107; }
+.stat-bar[style*="width: 7"], .stat-bar[style*="width: 8"] { background-color: #8bc34a; }
+.stat-bar[style*="width: 9"], .stat-bar[style*="width: 10"] { background-color: #4CAF50; }
+
+
+/* Notificação de Feedback */
+.feedback-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 1001;
+    font-size: 0.9rem;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.feedback-notification.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.feedback-notification.error {
+    background-color: #d32f2f;
+}
+.modal-content p {
+    margin-bottom: 5px;
+}
+.pokemon-details-section h3 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    color: #ef5350;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+body.dark .pokemon-details-section h3 {
+    border-bottom-color: #555;
+}
+.detail-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+}
+.detail-item .desc-title {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 30px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 10px;
+    white-space: nowrap;
+    color: white;
+    box-sizing: border-box;
+    text-align: center;
+}
+.detail-item .desc-title + * {
+    font-weight: normal;
+    color: var(--text-light);
+    flex-grow: 1;
+    flex-wrap: wrap;
+    word-break: break-word;
+}
+body.dark .detail-item .desc-title + * {
+    color: var(--text-dark);
+}
+.detail-item .pokemon-type {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    text-transform: capitalize;
+    min-width: 60px;
+    height: 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.pokemon-type.dual-type {
+    display: inline-flex;
+    padding: 0;
+    height: 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.pokemon-type.dual-type span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    padding: 4px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
